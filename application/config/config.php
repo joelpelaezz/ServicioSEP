@@ -12,6 +12,7 @@
 |
 | If this is not set then CodeIgniter will guess the protocol, domain and
 | path to your installation.
+| $config['base_url']	= 'http://localhost:8080/sep';
 |
 */
 $config['base_url']	= 'http://localhost:8080/sep';
@@ -26,7 +27,7 @@ $config['base_url']	= 'http://localhost:8080/sep';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

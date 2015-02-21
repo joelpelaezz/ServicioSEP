@@ -7,4 +7,4 @@ RewriteEngine on
 # Eliminar index.php
 #-----------------------------------
 RewriteCond $1 !^(index\.php|images|robots\.txt|sitemap\.xml)
-RewriteRule ^(.*)$ /bootstrap-codeigniter/index.php/$1 [L]
+RewriteRule ^(.*)$ /sep/index.php/$1 [L]
