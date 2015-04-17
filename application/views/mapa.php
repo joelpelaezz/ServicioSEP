@@ -5,6 +5,6 @@
 	<?php echo $map['js']; ?>
 </head>
 <body>
-<? echo $map['html']?>;
+<? echo $map['html']?>
 </body>
 </html>

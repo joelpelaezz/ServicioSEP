@@ -19,7 +19,8 @@ class Usuario_model extends CI_Model {
             'usuario' => $data['usuario'],
             'telefono' => $data['telefono'],
             'domicilio' => $data['domicilio'],
-            'comentario' => $data['comentario']
+            'comentario' => $data['comentario'],
+             'idgcm' => $data['idgcm']
             )
     );
   }

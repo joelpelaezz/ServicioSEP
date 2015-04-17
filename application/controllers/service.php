@@ -12,7 +12,7 @@ class Service extends REST_Controller
           $this->load->model("usuario_model");
            $this->load->model("tservicio_model");
             $this->load->model("servicio_model");
-        
+         $this->load->helper('date');
        
         
         // Configure limits on our controller methods. Ensure
@@ -60,7 +60,7 @@ class Service extends REST_Controller
     }
 
 
-    
+    // actualizar
     function emergencia_put()
     {
         $result = $this->emergencia_model->update( $this->uri->segment(4), 
@@ -90,9 +90,10 @@ class Service extends REST_Controller
          
     }
 
-   
+   // agregar
     function emergencia_post()
     {
+        date_default_timezone_set("America/Argentina/Jujuy");
         $result = $this->emergencia_model->add(array(
             'usid' => $this->post('usid'),
             'sid' => $this->post('sid'),
@@ -101,19 +102,20 @@ class Service extends REST_Controller
             'estado' => $this->post('estado'),
             'comentariou' => $this->post('comentariou'),
             'comentarios' => $this->post('comentarios'),
-            'imagen' => $this->post('imagen')
+            'imagen' => $this->post('imagen'),
+            'fecha' => date('Y-m-d'),
+             'hora'=> date("H:i:s")
         ));
          
-       if($result === FALSE)
-       {
+       if($result === FALSE) {
             $this->response(0);
-        }
-         
-        else
-       {
-           $this->response($this->db->insert_id());
+        } else  {
+            redirect('http://localhost:8080/sep/mapa/index','refresh');
+            $this->response($this->db->insert_id());
+
        }
         
+
     }
 
  // transaccion
@@ -138,6 +140,30 @@ class Service extends REST_Controller
             $this->response(NULL, 404);
         }
     }
+
+ function emergenciasbyuser_get()
+    {
+        
+        if(!$this->get('usid'))
+        {
+            $this->response(NULL, 400);
+        }
+ 
+        
+        $emergencias = $this->emergencia_model->listarByUser( $this->get('usid'));
+         
+        if($emergencias)
+        {
+            $this->response($emergencias, 200);
+        }
+ 
+        else
+        {
+            $this->response(NULL, 404);
+        }
+    }
+
+
 //////////--------------FIN DE LOS SERVICIOS EMERGENCIAS-------------------------------------/////////
 
 
@@ -209,7 +235,9 @@ class Service extends REST_Controller
             'usuario' => $this->post('usuario'),
             'telefono' => $this->post('telefono'),
             'domicilio' => $this->post('domicilio'),
-            'comentario' => $this->post('comentario')
+            'comentario' => $this->post('comentario'),
+            'idgcm' => $this->post('idgcm')
+
           ));
          
        if($result === FALSE)

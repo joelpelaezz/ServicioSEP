@@ -6,6 +6,7 @@ class Emergencia_model extends CI_Model {
 
   	parent:: __construct();
   	$this->load->database();
+   
   }
 
   /**
@@ -21,8 +22,11 @@ class Emergencia_model extends CI_Model {
             'latitud' => $data['latitud'],
             'estado' => $data['estado'],
             'comentariou' => $data['comentariou'],
-            'comentarios' => $data['comentarios'])
-           // 'imagen' => $data['imagen'])
+            'comentarios' => $data['comentarios'],
+           'imagen' => $data['imagen'],
+           'fecha' =>  $data['fecha'],
+            'hora' =>  $data['hora']
+           )
             );
   }
   
@@ -36,6 +40,20 @@ class Emergencia_model extends CI_Model {
       else false;    
     
   }
+
+
+ /**
+   * 
+   * @return lista todos los cursos cargados en la BD
+   */
+  function listarByUser($usid){
+      $this->db->where('usid',$usid);
+      $query = $this->db->get('emergencia');
+      if ($query->num_rows()>0)return $query->result(); 
+      else false;    
+    
+  }
+
 
 
    /**

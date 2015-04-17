@@ -41,6 +41,7 @@ class Mapa extends CI_Controller {
 		// Create the map
 		$data = array();
 		$data['map'] = $this->googlemaps->create_map();
+		$data['datos'] = $this->emergencia_model->listar();
 		// Load our view, passing through the map data
 		$this->load->view('mapa', $data);
 	}
